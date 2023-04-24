@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HDR-NeRF</title>
+    <title>LIRF</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <!-- cover -->
@@ -16,30 +16,33 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h2>HDR-NeRF: High Dynamic Range Neural Radiance Fields</h2>
-            <h4 style="color:#5a6268;">CVPR 2022</h4>
+            <h2>Local Implicit Ray Function for Generalizable Radiance Field Representation</h2>
+            <h4 style="color:#5a6268;">CVPR 2023</h4>
             <hr>
             <h6>
               <a href="https://github.com/shsf0817/" target="_blank">Xin Huang</a><sup>1</sup>, 
               <a href="https://qzhang-cv.github.io/" target="_blank">Qi Zhang</a><sup>2</sup>, 
               <a href="" target="_blank">Ying Feng</a><sup>2</sup>,
-              <a href="http://users.cecs.anu.edu.au/~hongdong/" target="_blank">Hongdong Li</a><sup>3</sup>,
+              <a href="https://xiaoyu258.github.io/" target="_blank">Xiaoyu Li</a><sup>2</sup>,
               <a href="https://xuanwangvc.github.io/" target="_blank">Xuan Wang</a><sup>2</sup>,
               <a href="https://teacher.nwpu.edu.cn/qwang.html" target="_blank">Qing Wang</a><sup>1</sup>
             </h6>
             <p><sup>1</sup>Northwestern Polytechnical University &nbsp;&nbsp; 
-                <sup>2</sup>Tencent AI Lab &nbsp; &nbsp; 
-                <sup>3</sup>Australian National University
+                <sup>2</sup>Tencent AI Lab
             <br>
 
             <div class="row justify-content-center">
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2111.14451" role="button"  target="_blank">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
                     <i class="fa fa-file"></i> Paper</a> </p>
               </div>
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/shsf0817/hdr-nerf/" role="button"  target="_blank">
-                    <i class="fa fa-github-alt"></i> Code (Released)</a> </p>
+                <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                  <i class="fa fa-file"></i> arXiv</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                    <i class="fa fa-github-alt"></i> Code (Comming Soon)</a> </p>
               </div>
 <!--               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
@@ -63,44 +66,41 @@
             <hr style="margin-top:0px">
                 <img class="img-fluid" src="images/overview.png" alt="Architechture">
             <hr>
-          <p class="text-left"> We present High Dynamic Range Neural Radiance Fields (HDR-NeRF) to recover an HDR radiance field from a set of low dynamic range (LDR) views with different exposures. Using the HDR-NeRF, we are able to generate both novel HDR views and novel LDR views under different exposures. The key to our method is to model the physical imaging process, which dictates that the radiance of a scene point transforms to a pixel value in the LDR image with two implicit functions: a radiance field and a tone mapper. The radiance field encodes the scene radiance (values vary from 0 to +infty), which outputs the density and radiance of a ray by giving corresponding ray origin and ray direction. The tone mapper models the mapping process that a ray hitting on the camera sensor becomes a pixel value. The color of the ray is predicted by feeding the radiance and the corresponding exposure time into the tone mapper. We use the classic volume rendering technique to project the output radiance, colors, and densities into HDR and LDR images, while only the input LDR images are used as the supervision. We collect a new forward-facing HDR dataset to evaluate the proposed method. Experimental results on synthetic and real-world scenes validate that our method can not only accurately control the exposures of synthesized views but also render views with a high dynamic range.</p> </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
-
-  <!-- LDR views -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Novel LDR views</h3>
-            <hr style="margin-top:0px">
-              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="images/ldr1.mp4" type="video/mp4">
-              </video>
-            <p class="text-justify">
-              HDR-NeRF produces high-fidelity LDR views with varying exposures.
-            </p>
+          <p class="text-justify"> 
+            We propose <b>LIRF</b> (Local Implicit Ray Function), a generalizable neural rendering approach for novel view rendering. 
+            Current generalizable neural radiance fields (NeRF) methods sample a scene with a single ray per pixel and may therefore 
+            render blurred or aliased views when the input views and rendered views capture scene content with different resolutions. 
+            To solve this problem, we propose LIRF to aggregate the information from conical frustums to construct a ray. Given 3D 
+            positions within conical frustums, LIRF takes 3D coordinates and the features of conical frustums as inputs and predicts 
+            a local volumetric radiance field. Since the coordinates are continuous, LIRF renders high-quality novel views at a 
+            continuously-valued scale via volume rendering.  Besides, we predict the visible weights for each input view via 
+            transformer-based feature matching to improve the performance in occluded areas. Experimental results on real-world 
+            scenes validate that our method outperforms state-of-the-art methods on novel view rendering of unseen scenes at arbitrary scales. 
+          </p> 
         </div>
       </div>
     </div>
   </section>
   <br>
 
-    <!-- HDR views -->
+    <!-- pipeline -->
     <section>
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-              <h3>Novel HDR views (Tone-mapped)</h3>
+              <h3>Pipeline Overview</h3>
               <hr style="margin-top:0px">
-              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="images/hdr1.mp4" type="video/mp4">
-              </video>
+                  <img class="img-fluid" src="images/pipeline.png" alt="Architechture">
+                  <!-- <img class="img-fluid" src="images/pipeline.png" alt="Architechture" style="width:512px;"> -->
+              <hr>
               <p class="text-justify">
-                Our HDR-NeRF is able to render novel HDR views. The tone-mapped HDR views reveal the details of over-exposure and under-exposure areas.
+                The overview of LIRF. Our goal is to predict volumetric radiance fields from a set of multi-view images captured at a consistent image scale (&times1), 
+                and output novel views at continuous scales (&times;0.5 &sim; &times;4). Our proposed framework is composed of five parts: 
+                1) extracting 2D feature maps from source images, 
+                2) obtaining the image feature for the samples on target rays via local implicit ray function, 
+                3) predicting the visibility weights of each source view by matching feature patches, 
+                4) aggregating local image features from different source views and mapping them into colors and densities, 
+                5) rendering a target pixel via volume rendering.
               </p>
           </div>
         </div>
@@ -108,74 +108,61 @@
     </section>
     <br>
 
-  <!-- comparisons -->
+  <!-- Multiscale views -->
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <h3>Comparisons of novel LDR/HDR views</h3>
-            <hr style="margin-top:0px;">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="images/cmp.mp4" type="video/mp4">
-            </video>
-            <p class="text-justify">Mildenhall et al., NeRF:Representing scenes as neural radiance fields for view synthesis. ECCV, pages 405–421, 2020.    </p>
-            <p class="text-justify">Martin-Brualla, et al., NeRF in the wild: Neural radiance fields for unconstrained photo collections. CVPR, pages 7210–7219, 2021. </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
-  <!-- pipeline -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Pipeline Overview</h3>
-            <hr style="margin-top:0px">
-                <img class="img-fluid" src="images/pipeline.png" alt="Architechture" style="width:512px;">
-            <hr>
+            <h3>Low Resolution Views and Close-up Shots</h3>
             <p class="text-justify">
-              The pipeline of HDR-NeRF modeling the physical process. Our method is consisted of two modules: an HDR radiance
-              field models the target scene for radiance and densities and a tone mapper models the CRF for colors.
+              We train LIRF on datasets with input images at &times1 resolution and GT images at different resolutions (&times;0.5 &sim; &times;4). 
+              LIRF is capable of rendering high-fidelity views at varying scales. 
+              Comparied with <a href="https://ibrnet.github.io/">IBRNet</a>, <a href="https://liuyuan-pal.github.io/NeuRay/">NeuRay</a>, and <a href="https://www.idiap.ch/paper/geonerf/">GeoNeRF</a>, 
+              LIRF produces Low Resolution Views (&times;0.5) with fewer aliasing artifacts and Close-up Shots (&times;2) with fewer blurring artifacts.
             </p>
+            <hr style="margin-top:0px">
+              <div class="cropped">
+                <video width="90%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/video1.mp4" type="video/mp4">
+              </div>
+    
+              <div class="cropped">
+              <video width="90%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/video2.mp4" type="video/mp4">
+              </video>
+              </div>
+
+              <div class="cropped">
+              <video width="90%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/video3.mp4" type="video/mp4">
+              </video>
+              </div>
         </div>
       </div>
     </div>
   </section>
   <br>
 
-  <!-- results video -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Results and Comparisons</h3>
-            <hr style="margin-top:0px">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/GmxsW9L1O6s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
+    <!-- Our views -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Varying Resolutions</h3>
+              <p class="text-justify">
+               LIRF is a novel method for novel view synthesis of unseen scenes. It not only renders novel views with fewer blurring artifacts, but also produces novel views at arbitrary scales, even at higher scales than input views.
+              </p>
+              <hr style="margin-top:0px">
+              <video width="90%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/video4.mp4" type="video/mp4">
+              </video>
 
-  <!-- overview video
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Overview Video</h3>
-            <hr style="margin-top:0px">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/VTEROu-Yz04" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <br> -->
+    </section>
+    <br>
+
 
   <!-- citing -->
   <div class="container">
@@ -184,12 +171,11 @@
           <h3>Citation</h3>
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
-<code>@article{huang2021hdrnerf,
-    title={HDR-NeRF: High Dynamic Range Neural Radiance Fields},
-    author={Xin, Huang and Qi, Zhang and Ying, Feng and Hongdong, Li and Xuan, Wang and Qing, Wang},
-    journal = {arXiv preprint arXiv:2111.14451},
-    month = {November},
-    year = {2021}
+<code>@inproceedings{huang2023lirf,
+    title={Local Implicit Ray Function for Generalizable Radiance Field Representation},
+    author={Xin, Huang and Qi, Zhang and Ying, Feng and Xiaoyu, Li and Xuan, Wang and Qing, Wang},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    year={2023}
 }</code></pre>
           <hr>
       </div>
@@ -197,7 +183,7 @@
   </div>
 
   <!-- ack -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="row ">
       <div class="col-12">
           <h3>Acknowledgements</h3>
@@ -208,7 +194,7 @@
           <hr>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <footer class="text-center" style="margin-bottom:10px">
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
